@@ -7,8 +7,8 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 # ✅ BOT_TOKEN Koyeb Environment Variables থেকে আসবে
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
-CHANNEL_1 = "1002023435387"
-CHANNEL_2 = "1002872277979"
+CHANNEL_1 = "-1002023435387"
+CHANNEL_2 = "-1002872277979"
 
 POST_INTERVAL_SECONDS = 10 * 3600  # Default: 10 hours
 
