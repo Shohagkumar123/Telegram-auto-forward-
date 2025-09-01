@@ -4,7 +4,7 @@ from telegram import Bot, Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 
-# ✅ BOT_TOKEN Koyeb Environment থেকে আসবে
+# ✅ BOT_TOKEN Koyeb Environment Variables থেকে আসবে
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 CHANNEL_1 = "1002023435387"
@@ -75,7 +75,10 @@ app = ApplicationBuilder().token(BOT_TOKEN).build()
 app.add_handler(CommandHandler("start", start))
 app.add_handler(CommandHandler("setinterval", setinterval))
 
-loop = asyncio.get_event_loop()
+# 🔹 Fix: Python 3.13 weakref bug এড়াতে নতুন event loop ব্যবহার করছি
+loop = asyncio.new_event_loop()
+asyncio.set_event_loop(loop)
+
 scheduler = AsyncIOScheduler(event_loop=loop)
 job = scheduler.add_job(copy_posts, 'interval', seconds=POST_INTERVAL_SECONDS)
 scheduler.start()
